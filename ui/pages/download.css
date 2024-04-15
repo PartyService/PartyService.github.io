@@ -1,0 +1,163 @@
+.device, .devicedl .download {
+    display: none;
+}
+
+.fetched .download {
+    height: max-content !important;
+}
+.devicedl .download {
+    display: none;
+}
+.devicedl .device {
+    height: 0rem !important;
+    display: block;
+}
+.devicedl.fetched .device {
+    height: 24rem !important;
+    display: block;
+}
+
+.device .phone {
+    width: 30%;
+    height: 90%;
+    object-fit: contain;
+    position: absolute;
+    left: 1.5rem;
+    transition: all .2s, transform 2s;
+    background: #72727221;
+    z-index: 0;
+    top: 5%;
+    border-radius: 1rem;
+}
+
+.device .banner-title,
+.device .banner-subtitle,
+.banner .banner-maintainer,
+.banner .banner-availiabilty {
+    padding-left: 1.5em;
+    width: calc(100% - 30% - 4.5rem);
+    text-align: left;
+    left: calc(30% + 3rem);
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.device .banner-title {
+    font-size: 160%;
+    padding-left: 1.2em;
+}
+
+.device .banner-subtitle {
+    font-size: 130%;
+    top: 4.3rem;
+}
+
+.banner .banner-maintainer {
+    top: 6.3rem;
+    font-size: 130%;
+    position: absolute;
+    font-weight: normal;
+    transition: all .2s;
+}
+
+.banner .banner-availiabilty {
+    padding-left: 1.7em;
+    top: 74%;
+    font-size: 100%;
+    position: absolute;
+    font-weight: normal;
+    transition: all .2s;
+} 
+#content {
+    width: calc(100% - 36px);
+}
+
+.container-grid {
+    width: calc(100% - 36px);
+    height: calc(100% - 12.3rem);
+    padding-bottom: 12rem;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    top: 12rem;
+    position: relative;
+    margin: auto;
+    transition: all .2s;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 1rem;
+}
+
+.container-grid .grid {
+    width: auto;
+    height: 16rem;
+    background-color: rgba(126, 126, 126, 0.171);
+    margin: 1.2em;
+    border-radius: 2em;
+    transition: all .2s;
+    overflow: hidden;
+}
+
+.container-grid .grid:hover {
+    transform: scale(1.1);
+}
+
+.container-grid .grid {
+    transform: scale(1.001);
+    /*fix f'd up rendering on some browser*/
+}
+
+.container-grid .grid .material-symbols-rounded {
+    position: relative;
+    z-index: 1;
+    font-size: 7.4em;
+    top: 13%;
+}
+
+.container-grid .grid .title {
+    font-weight: bold;
+    font-size: 130%;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    top: 16%;
+    display: block;
+}
+
+.container-grid .grid .subtitle {
+    top: 18%;
+    font-size: medium;
+    position: relative;
+    z-index: 1;
+    width: 70%;
+    margin: auto;
+    text-align: center;
+    display: block;
+}
+.download .container-grid .grid .phone {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    height: 8.3em;
+    top: 7%;
+    object-fit: contain;
+}
+
+.fetched .loadspinner{
+    display: none!important;
+  }
+  .device .sub-banner button{
+    width: 9rem;
+    height: 2.5rem;
+    font-size: 120%;
+    position: absolute;
+    font-weight: normal;
+    top: 79%;
+    border: none;
+    background: #babe6c;
+    color: #212121;
+    border-radius: 1em;
+    z-index: 1;
+    left: calc(30% + 4.5rem);
+}

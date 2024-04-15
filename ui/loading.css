@@ -1,0 +1,115 @@
+.loadspinner .spinner * {
+  box-sizing: border-box;
+}
+
+.loadspinner .spinner {
+  display: inline-block;
+  -webkit-animation-name: anim-spinner;
+  animation-name: anim-spinner;
+  -webkit-animation-duration: 0.7s;
+  animation-duration: 0.7s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  position: absolute;
+  animation-timing-function: linear;
+  z-index: 9;
+  top: 50%;
+}
+
+.loadspinner .spinner .circle {
+  width: 4em;
+  height: 2em;
+  overflow: hidden;
+}
+
+.loadspinner .spinner .circle-inner {
+  transform: rotate(45deg);
+  border-radius: 50%;
+  border: 0.4em solid rgba(255, 255, 255, 0.733);
+  border-right: 0.4em solid transparent;
+  border-bottom: 0.4em solid transparent;
+  width: 100%;
+  height: 200%;
+  -webkit-animation-name: anim-circle-1;
+  animation-name: anim-circle-1;
+  -webkit-animation-duration: 0.7s;
+  animation-duration: 0.7s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+  -webkit-animation-timing-function: cubic-bezier(0.25, 0.1, 0.5, 1);
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.5, 1);
+}
+
+.loadspinner .spinner .circle-2 {
+  transform: rotate(180deg);
+}
+
+.loadspinner .spinner .circle-2 .circle-inner {
+  -webkit-animation-name: anim-circle-2;
+  animation-name: anim-circle-2;
+}
+
+@-webkit-keyframes anim-circle-1 {
+  from {
+    transform: rotate(60deg);
+  }
+
+  to {
+    transform: rotate(205deg);
+  }
+}
+
+@keyframes anim-circle-1 {
+  from {
+    transform: rotate(60deg);
+  }
+
+  to {
+    transform: rotate(205deg);
+  }
+}
+
+@-webkit-keyframes anim-circle-2 {
+  from {
+    transform: rotate(30deg);
+  }
+
+  to {
+    transform: rotate(-115deg);
+  }
+}
+
+@keyframes anim-circle-2 {
+  from {
+    transform: rotate(30deg);
+  }
+
+  to {
+    transform: rotate(-115deg);
+  }
+}
+
+@-webkit-keyframes anim-spinner {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes anim-spinner {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*# sourceMappingURL=base.css.map */

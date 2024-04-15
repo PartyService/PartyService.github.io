@@ -1,0 +1,103 @@
+.banner.repository {
+    height: min-content;
+}
+
+.list-wrapper {
+    width: 100%;
+    margin: 9rem 2.5%;
+}
+
+.list {
+    border-radius: 2px;
+    list-style: none;
+    padding: 10px 20px;
+}
+
+.list-item {
+    display: flex;
+    margin: 0.2em;
+    padding-bottom: 0.15em;
+    padding-top: 0.15em;
+    border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.list-item-pictures {
+    width: 4.2rem;
+    height: 4.2rem;
+    text-align: center;
+    display: flex;
+    background-color: #21212132;
+    background-image: linear-gradient(-45deg, #000000, #fffafa48);
+    background-blend-mode: screen;
+    justify-content: space-evenly;
+    flex-direction: column-reverse;
+    align-items: center;
+    flex-basis: 4.2rem;
+	flex-grow: 0;
+	flex-shrink: 0;
+    border-radius: 50%;
+    transition: all .2s;
+    font-weight: bold;
+}
+.list-item:hover .list-item-pictures {
+    background-image: none;
+    border-radius: 20%;
+    transition: all .2s;
+    background-image: linear-gradient(45deg, #000000, #00000000);
+}
+
+.list-item-content {
+    margin-left: 20px;
+}
+
+.list-item h4,
+.list-item p {
+    margin: 0;
+}
+
+.list-item h4 {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.list-item p {
+    margin-top: 5px;
+    color: #9f9f9f;
+}
+
+.list-item-pictures.Python {
+    background-color: #3572A5;
+}
+
+.list-item-pictures.Java {
+    background-color: #b07219;
+}
+
+.list-item-pictures.C\+\+ {
+    background-color: #3572A5;
+}
+
+.list-item-pictures.Shell {
+    background-color: #89e051;
+}
+
+.list-item-pictures.Go {
+    background-color: #00ADD8;
+}
+
+.list-item-pictures.Makefile {
+    background-color: #427819;
+}
+.list-item-pictures.C {
+    background-color: #555555;
+}
+.list-item-pictures.Assembly {
+    background-color: #6E4C13;
+}
+.list-item-pictures.HTML {
+    background-color: #e34c26;
+}

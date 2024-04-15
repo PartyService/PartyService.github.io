@@ -1,0 +1,115 @@
+.banner.banner1 .title {
+    font-size: 200%;
+    position: absolute;
+    font-weight: bold;
+    top: 3rem!important;
+    left: 5%;
+    transition: all .2s;
+    z-index: 1;
+}
+
+.banner.banner1 .subtitle {
+    width: 40%;
+    font-size: 120%;
+    position: absolute;
+    font-weight: normal;
+    top: 60%!important;
+    left: 5%;
+    transition: all .2s;
+    z-index: 1;
+}
+
+.banner1 .contribute {
+    left: calc(6% + 9rem);
+}
+
+.banner.banner1 {
+    height: 17em;
+}
+
+.banner1 .phone {
+    width: 30%;
+    height: 90%;
+    object-fit: contain;
+    position: absolute;
+    left: 60%;
+    transition: all .2s, transform 2s;
+    z-index: 0;
+}
+
+.banner.banner2 {
+    height: min-content;
+}
+.banner.banner2 .title {
+    font-size: 200%;
+    position: absolute;
+    font-weight: bold;
+    top: 3rem;
+    left: 5%;
+    transition: all .2s;
+    z-index: 1;
+}
+
+.banner.banner2 .subtitle {
+    width: 90%!important;
+    font-size: 1.2rem;
+    position: absolute;
+    font-weight: normal;
+    top: 6rem;
+    left: 5%;
+    transition: all .2s;
+    z-index: 1;
+}
+
+.list-wrapper {
+    width: 100%;
+    margin: 9rem 2.5%;
+}
+
+.list {
+    border-radius: 2px;
+    list-style: none;
+    padding: 10px 20px;
+}
+
+.list-item {
+    display: flex;
+    margin: 0.2em;
+    padding-bottom: 0.15em;
+    padding-top: 0.15em;
+    border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.list-item-pictures {
+    width: 4.2rem;
+    height: 4.2rem;
+}
+
+.list-item-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 20%;
+}
+
+.list-item-content {
+    margin-left: 20px;
+}
+
+.list-item h4,
+.list-item p {
+    margin: 0;
+}
+
+.list-item h4 {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.list-item p {
+    margin-top: 5px;
+    color: #9f9f9f;
+}
