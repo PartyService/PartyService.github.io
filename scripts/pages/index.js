@@ -32,13 +32,13 @@ $(window).on('load', function () {
     $('.sourcechecker').append(sourcechecker)
      
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-        document.querySelector('.phone').src = "assets/drawable/phone_light.png";
+        document.querySelector('.phone').src = "assets/drawable/phone_dark.png";
     }
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
         const newColorScheme = event.matches ? "dark" : "light";
         if (newColorScheme == 'light') {
-            document.querySelector('.phone').src = "assets/drawable/phone_light.png";
+            document.querySelector('.phone').src = "assets/drawable/phone_dark.png";
         }
         if (newColorScheme == 'dark') {
             document.querySelector('.phone').src = "assets/drawable/phone_dark.png";
