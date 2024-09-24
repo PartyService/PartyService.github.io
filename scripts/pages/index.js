@@ -6,9 +6,9 @@ var sourcechecker = `
 `;
 var advantages = `
                     <div class="grid light" onmouseover="ripple('.light')">
-                        <span class="material-symbols-rounded" translate="no">bolt</span>
-                        <span class="title">Fast</span>
-                        <span class="subtitle">The server is hosted on AWS Server</span>
+                        <span class="material-symbols-rounded" translate="no">celebration</span>
+                        <span class="title">World Dance Floor</span>
+                        <span class="subtitle">Beat Another Player!</span>
                     </div>
                     <div class="grid goodui" onmouseover="ripple('.goodui')">
                         <span class="material-symbols-rounded" translate="no">auto_awesome</span>
