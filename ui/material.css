@@ -103,7 +103,8 @@ input.banner-search{
 /*Navigation Bar*/
 
 #navbar {
-    background-color: #414548da;
+    /*background-color: #414548da;*/
+    background-color: #17191cc4;
     background-image: url(../assets/mipmap/chaccaron.webp);
     background-size: 3.5em;
     width: 100%;
@@ -163,11 +164,12 @@ input.banner-search{
     width: 100%;
     height: 27em;
     border-radius: 1em;
-    background: #2b2e31;
+    background: #2b2e3139;
     margin-top: 1em;
     position: relative;
     overflow: hidden;
     transition: all .2s;
+    backdrop-filter: blur(0.2em);
 }
 
 #content {
