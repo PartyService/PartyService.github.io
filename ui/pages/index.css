@@ -161,3 +161,57 @@
     border-radius: 1em;
     z-index: 1;
 }
+
+.infocontainer {
+    display: flex;
+    bottom: 0;
+    position: absolute;
+    height: 19em;
+    width: 100%;
+}
+
+.infocontainer .panel {
+    width: 50%;
+    display: block;
+    position: relative;
+}
+
+.infocontainer .title {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 2em;
+    box-sizing: content-box;
+    font-size: 120%;
+    font-weight: bold;
+}
+
+.infocontainer .OnlinePlayers {
+    top: 25%;
+    position: absolute;
+    font-size: 3em;
+    font-weight: bolder;
+    width: 100%;
+    text-align: center;
+}
+.infocontainer .serverstats {
+    top: 25%;
+    position: absolute;
+    font-size: 3em;
+    font-weight: bolder;
+    width: 100%;
+    text-align: center;
+}
+.infocontainer .panel.bottom {
+    position: absolute;
+    width: 100%;
+    top: 40%;
+}
+.infocontainer .deployTime {
+    top: 2.5em;
+    position: absolute;
+    font-size: 2em;
+    font-weight: bolder;
+    width: 100%;
+    text-align: center;
+}

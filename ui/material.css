@@ -47,18 +47,11 @@
     opacity: 0.0;
     animation: none;
 }
+
 .loading #content {
     overflow: hidden;
 }
-.loading #navbar {
-    height: 100vh;
-    background-color: #0b0e1417;
-    background-size: 10%;
-    animation: bigger-bg .5s;
-    background-position: center;
-    border-radius: 0;
-    transition: all .1s;
-}
+
 
 button {
     position: relative;
@@ -78,12 +71,15 @@ span.ripple {
     top: 0;
     background-image: radial-gradient(#6081b065 0%, #6089b0 40%, #6081b000 60%);
 }
+
 button span.ripple {
     height: 160%;
     top: -30%;
 }
-input, input:focus{
-    border: none!important;
+
+input,
+input:focus {
+    border: none !important;
     background-color: #5b697442;
     color: inherit;
     font-family: inherit;
@@ -94,12 +90,14 @@ input, input:focus{
     transition: all .2s;
     border-radius: 22rem;
 }
-input.banner-search{
+
+input.banner-search {
     width: calc(16rem + 5%);
     height: 3rem;
     top: 8rem;
     left: calc(50% - 8rem - 2.5%);
 }
+
 /*Navigation Bar*/
 
 #navbar {
@@ -160,6 +158,7 @@ input.banner-search{
     display: flex !important;
     flex-basis: auto;
 }
+
 .banner {
     width: 100%;
     height: 27em;
@@ -179,6 +178,7 @@ input.banner-search{
     position: relative;
     transition: all .5s;
 }
+
 .banner .banner-title {
     text-align: center;
     width: 100%;
@@ -188,6 +188,7 @@ input.banner-search{
     font-weight: bold;
     transition: all .2s;
 }
+
 .banner .banner-subtitle {
     text-align: center;
     width: 100%;
@@ -197,10 +198,12 @@ input.banner-search{
     font-weight: normal;
     transition: all .2s;
 }
+
 .loadspinner {
     width: 100%;
     text-align: center;
-  }
-  .loadspinner.hide{
-    display: none!important;
-  }
+}
+
+.loadspinner.hide {
+    display: none !important;
+}

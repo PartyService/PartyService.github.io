@@ -27,7 +27,7 @@ var advantages = `
                     </div>
 `;
 
-$(window).on('load', function () {
+$(window).on('load', async function () {
     $('.advantages .container-grid').append(advantages)
     $('.sourcechecker').append(sourcechecker)
      
@@ -44,4 +44,49 @@ $(window).on('load', function () {
             document.querySelector('.phone').src = "assets/drawable/phone_dark.png";
         }
     });
+    await updateServerStats()
 });
+
+async function updateServerStats() {
+    const serverStatusElement = document.querySelector('.panel.left .serverstats');
+    const onlinePlayersElement = document.querySelector('.panel.right .OnlinePlayers');
+    const deployTimeElement = document.querySelector('.panel.bottom .deployTime');
+
+    try {
+        const response = await fetch('https://justdanceservices.prjktla.online/status/v1/serverstats');
+        
+        if (response.ok) {
+            // Jika server merespons dengan status 200, berarti server online
+            serverStatusElement.textContent = "• Online";
+            serverStatusElement.className = "serverstats online";
+        } else {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+
+        try {
+            const data = await response.json();
+
+            // Jika data berhasil diambil, perbarui elemen
+            onlinePlayersElement.textContent = data.onlineUser || "N/A";
+            const deployDate = new Date(data.deployTime);
+            deployTimeElement.textContent = deployDate.toLocaleString();
+        } catch (error) {
+            // Jika terjadi kesalahan parsing JSON (kemungkinan masalah CORS), tampilkan pesan default
+            console.warn("Error parsing JSON data:", error);
+            onlinePlayersElement.textContent = "N/A";
+            deployTimeElement.textContent = "N/A";
+        }
+    } catch (error) {
+        console.error("Error fetching server stats:", error);
+
+        // Set status sebagai Offline jika ada masalah
+        serverStatusElement.textContent = "• Offline";
+        serverStatusElement.className = "serverstats offline";
+        
+        // Reset data lainnya
+        onlinePlayersElement.textContent = "N/A";
+        deployTimeElement.textContent = "N/A";
+    }
+}
+
+
