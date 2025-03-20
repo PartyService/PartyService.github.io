@@ -31,8 +31,8 @@
     top: 79%;
     left: 5%;
     border: none;
-    background: #6c8dbe;
-    color: #212121;
+    background: #8f4c38;
+    color: #ffffff;
     border-radius: 1em;
     z-index: 1;
 }
@@ -95,7 +95,7 @@
 .advantages .container-grid .grid {
     width: auto;
     height: 16rem;
-    background-color: rgba(37, 40, 45, 0.315);
+    background-color: rgba(45, 37, 37, 0.315);
     margin: 1em;
     border-radius: 2em;
     transition: all .2s;

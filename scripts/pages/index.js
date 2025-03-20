@@ -22,8 +22,8 @@ var advantages = `
                     </div>
                     <div class="grid uptodate" onmouseover="ripple('.uptodate')">
                         <span class="material-symbols-rounded" translate="no">system_update</span>
-                        <span class="title">Up-To-Date</span>
-                        <span class="subtitle">Always Use New Security Patch</span>
+                        <span class="title">OpenParty Based</span>
+                        <span class="subtitle">Open source and free!</span>
                     </div>
 `;
 

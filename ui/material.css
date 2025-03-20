@@ -5,7 +5,7 @@
 }
 
 #page {
-    background: #17191c;
+    background: #1a110f;
     font-family: "GoogleSans Regular", "system-ui";
     margin: 0 !important;
     padding: 0 !important;
@@ -26,12 +26,12 @@
 
 ::-webkit-scrollbar-track {
     width: 0.3em;
-    background: linear-gradient(to right, #0000 40.01%, #262b31 40.02%);
+    background: linear-gradient(to right, #0000 40.01%, #312626 40.02%);
     border-radius: 0em 0 0 0.4em;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #214076;
+    background-color: #8f4c38;
     border-radius: 0.3em 0 0 0.3em;
     width: 0.6em;
     left: -0.3em !important;
@@ -69,7 +69,7 @@ span.ripple {
     animation: ripple 600ms linear;
     left: 0%;
     top: 0;
-    background-image: radial-gradient(#6081b065 0%, #6089b0 40%, #6081b000 60%);
+    background-image: radial-gradient(#8f4c3865 0%, #8f4c38 40%, #8f4c3800 60%);
 }
 
 button span.ripple {
@@ -80,7 +80,7 @@ button span.ripple {
 input,
 input:focus {
     border: none !important;
-    background-color: #5b697442;
+    background-color: #745d5b42;
     color: inherit;
     font-family: inherit;
     text-align: center;
@@ -102,7 +102,7 @@ input.banner-search {
 
 #navbar {
     /*background-color: #414548da;*/
-    background-color: #17191cc4;
+    background-color: #1a110fc4;
     background-image: url(../assets/mipmap/chaccaron.webp);
     background-size: 3.5em;
     width: 100%;
@@ -163,7 +163,7 @@ input.banner-search {
     width: 100%;
     height: 27em;
     border-radius: 1em;
-    background: #2b2e3139;
+    background: #312b2b39;
     margin-top: 1em;
     position: relative;
     overflow: hidden;
