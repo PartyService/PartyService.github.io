@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Just Dance Party</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/index.css">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-pink': '#ff1493',
+                        'neon-blue': '#00bfff',
+                        'dark-bg': '#0a0a0f',
+                        'dark-card': '#1a1a2e',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for gradients and links, ensuring consistency */
+        .text-gradient {
+            background: linear-gradient(to right, #ff1493, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-link {
+            @apply text-white hover:text-neon-pink transition duration-300 ease-in-out font-semibold;
+        }
+        .btn-primary {
+            @apply inline-block px-8 py-3 rounded-full font-bold text-white transition-all duration-300 ease-in-out
+                   bg-gradient-to-r from-neon-pink to-neon-blue shadow-lg hover:shadow-neon-pink/50
+                   transform hover:-translate-y-1;
+        }
+        .footer-link {
+            @apply text-gray-300 hover:text-neon-blue transition duration-300 ease-in-out;
+        }
+        .footer-social-icon {
+            @apply text-gray-300 hover:text-neon-pink transition duration-300 ease-in-out text-2xl;
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-white min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-dark-bg/80 backdrop-blur-lg border-b border-neon-pink/20">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="assets/logo.png" alt="Just Dance Party Logo" class="h-10 w-auto mr-3">
+                    <span class="text-xl font-bold bg-gradient-to-r from-neon-pink to-neon-blue bg-clip-text text-transparent">
+                        Just Dance Party
+                    </span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html#home" class="nav-link">Home</a>
+                    <a href="index.html#features" class="nav-link">Features</a>
+                    <a href="index.html#download" class="nav-link">Download</a>
+                </div>
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-dark-bg/95 backdrop-blur-lg hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
+            <a href="index.html#home" class="nav-link" onclick="toggleMobileMenu()">Home</a>
+            <a href="index.html#features" class="nav-link" onclick="toggleMobileMenu()">Features</a>
+            <a href="index.html#download" class="nav-link" onclick="toggleMobileMenu()">Download</a>
+            <button class="absolute top-6 right-6 text-white text-4xl" onclick="toggleMobileMenu()">
+                &times;
+            </button>
+        </div>
+    </div>
+
+    <main class="flex-grow flex items-center justify-center py-20">
+        <div class="container mx-auto px-6 text-center">
+            <div class="max-w-3xl mx-auto bg-dark-card/50 backdrop-blur-lg rounded-3xl p-8 border border-neon-blue/20 text-gray-300 shadow-xl text-left">
+                <h1 class="text-4xl lg:text-5xl font-bold mb-8 text-center text-gradient">Privacy Policy</h1>
+                <p class="text-lg mb-6">
+                    At Just Dance Party, we are deeply committed to safeguarding your privacy. This Privacy Policy outlines our unwavering approach to handling any information related to your use of our unofficial Just Dance Party modification ("Mod"). Our core principle is **privacy-first**, ensuring that your dance experience is entirely focused on fun, without concerns about your personal information.
+                </p>
+
+                <h2 class="text-2xl font-bold mb-4 text-neon-pink">1. Information We Do NOT Collect</h2>
+                <p class="mb-4">
+                    We unequivocally state that Just Dance Party does **not** collect, store, or process any personal data from our users. This includes, but is not limited to:
+                </p>
+                <ul class="list-disc list-inside mb-4 pl-4 space-y-2">
+                    <li>Your name, email address, physical address, or phone number.</li>
+                    <li>Your Internet Protocol (IP) address or unique device identifiers.</li>
+                    <li>Your location data.</li>
+                    <li>Any demographic information (age, gender, etc.).</li>
+                    <li>Usage data such as playtime, songs played, scores, or preferences.</li>
+                    <li>Information about your device (e.g., operating system, hardware specifications).</li>
+                </ul>
+                <p class="mb-4">
+                    We do not employ analytics tools, tracking cookies, web beacons, or any similar technologies designed to monitor or collect information about your activities within the Mod or on this website. Our design philosophy ensures that your interaction with Just Dance Party remains entirely private and anonymous.
+                </p>
+
+                <h2 class="text-2xl font-bold mb-4 text-neon-pink">2. How We Use Information (Or Don't)</h2>
+                <p class="mb-4">
+                    Since we do not collect any personal data, we have no information to use for any purpose. This means:
+                </p>
+                <ul class="list-disc list-inside mb-4 pl-4 space-y-2">
+                    <li>We do not use your data for marketing, advertising, or promotional activities.</li>
+                    <li>We do not create user profiles or perform data analysis based on your usage.</li>
+                    <li>Your activities within Just Dance Party, including your personalized playlists and themes, remain solely on our server but we don't access them.</li>
+                </ul>
+                <p class="mb-4">
+                    Our commitment is to provide a purely self-contained experience where your privacy is inherently protected by design.
+                </p>
+
+                <h2 class="text-2xl font-bold mb-4 text-neon-pink">3. Information Sharing and Disclosure</h2>
+                <p class="mb-4">
+                    Because we do not collect any personal data, there is no information for us to share, sell, rent, or disclose to any third parties. Your privacy is paramount, and we will never compromise it by sharing non-existent data.
+                </p>
+                <p class="mb-4">
+                    The only theoretical exception would be if we are compelled by a valid legal order, such as a court order or subpoena. However, since we hold no personal data, there would be no data to provide in such an event.
+                </p>
+
+                <h2 class="text-2xl font-bold mb-4 text-neon-pink">4. Data Security</h2>
+                <p class="mb-4">
+                    While we do not collect or store user data, we still prioritize the overall security and integrity of our platform. We implement robust security measures in the development and distribution of the Just Dance Party Mod to ensure that the environment you interact with is as safe and secure as possible. Our aim is to provide a self-contained and trusted ecosystem for all users.
+                </p>
+
+                <h2 class="text-2xl font-bold mb-4 text-neon-pink">5. Third-Party Links</h2>
+                <p class="mb-4">
+                    This website and the Just Dance Party Mod may contain links to other websites or services (e.g., Discord, Twitter, YouTube). Please be aware that we are not responsible for the content or privacy practices of such other sites. We encourage our users to be aware when they leave our site and to read the privacy statements of any other site that collects personally identifiable information. This Privacy Policy applies solely to information collected by Just Dance Party.
+                </p>
+
+                <h2 class="text-2xl font-bold mb-4 text-neon-pink">6. Children's Privacy</h2>
+                <p class="mb-4">
+                    Just Dance Party is not intended for use by children under the age of 13. We do not knowingly collect any personal data from children under 13. If you are a parent or guardian and believe that your child has provided us with personal information, please contact us at <a href="mailto:jdpartyera@gmail.com" class="text-neon-blue hover:underline">jdpartyera@gmail.com</a> so that we can address your concerns.
+                </p>
+
+                <h2 class="text-2xl font-bold mb-4 text-neon-pink">7. Changes to This Policy</h2>
+                <p class="mb-4">
+                    We may update our Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify you of any significant changes by posting the new Privacy Policy on this page and updating the "Last updated" date at the bottom of this page. You are advised to review this Privacy Policy periodically for any changes.
+                </p>
+
+                <h2 class="text-2xl font-bold mb-4 text-neon-pink">8. Contact Us</h2>
+                <p class="mb-4">
+                    If you have any questions or concerns about this Privacy Policy or our privacy practices, please do not hesitate to contact us at:
+                    <br>
+                    <strong>Email:</strong> <a href="mailto:jdpartyera@gmail.com" class="text-neon-blue hover:underline">jdpartyera@gmail.com</a>
+                </p>
+
+                <p class="text-sm text-gray-400 mt-8 text-center">
+                    Last updated: June 15, 2025
+                </p>
+                <a href="index.html" class="btn-primary mt-8 inline-flex items-center">
+                    Go Back to Home
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-card/50 backdrop-blur-lg py-12 border-t border-neon-pink/20 mt-auto">
+        <div class="container mx-auto px-6 text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <!-- Logo and Description -->
+                <div class="flex flex-col items-center md:items-start">
+                    <div class="flex items-center mb-4">
+                        <img src="assets/logo.png" alt="Just Dance Party Logo" class="h-10 w-auto mr-3">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-neon-pink to-neon-blue bg-clip-text text-transparent -ml-1">
+                            Just Dance Party
+                        </span>
+                    </div>
+                    <p class="text-gray-300 mb-4 max-w-xs">
+                        Experience the ultimate dance game with over 700+ songs.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://discord.gg/dKMVNTcy9x" target="_blank" rel="noopener noreferrer" class="footer-social-icon">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="footer-social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="footer-social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-xl font-bold text-neon-blue mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#home" class="footer-link">Home</a></li>
+                        <li><a href="index.html#features" class="footer-link">Features</a></li>
+                        <li><a href="index.html#download" class="footer-link">Download</a></li>
+                        <li><a href="about.html" class="footer-link">About Us</a></li>
+                        <li><a href="404.html" class="footer-link">Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact/Legal -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-xl font-bold text-neon-blue mb-6">Legal & Contact</h4>
+                    <ul class="space-y-3">
+                        <li><a href="privacy-policy.html" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html" class="footer-link">Terms of Service</a></li>
+                        <li><a href="mailto:jdpartyera@gmail.com" class="footer-link">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-neon-pink/10 pt-8 mt-8 text-gray-400 text-sm">
+                <p class="mb-2">&copy; 2024 Just Dance Party. All rights reserved.</p>
+                <p>Built with ❤️ for the dance community. Based on OpenParty project • Safe • Secure • Open Source</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Toggles the visibility of the mobile menu
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

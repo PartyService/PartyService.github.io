@@ -2,81 +2,624 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preload" href="ui/material.css" as="style" />
-    <link rel="preload" href="ui/pages/index.css" as="style" />
-    <link rel="preload" href="assets/mipmap/chaccaron.webp" as="image" />
-    <title>Home - JDFire</title>
-    <meta name="description" content="Just Dance Fire is a mod of Just Dance for 2017-2022">
-    <link rel="icon" href="assets/mipmap/chaccaron.webp" type="image/png" sizes="64x64">
-    <link rel="apple-touch-icon" href="assets/mipmap/chaccaron.webp" sizes="180x180">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="ui/material.css">
-    <script src="scripts/pages/index.js"></script>
-    <script src="scripts/base.js"></script>
-    <meta name="twitter:image:src" content="https://avatars.githubusercontent.com/u/129069360?s=400&amp;v=4">
-    <meta name="twitter:title" content="JDFire - Home">
+    <title>Just Dance Party - Dance Your Way to Victory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/index.css">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-pink': '#ff1493',
+                        'neon-blue': '#00bfff',
+                        'dark-bg': '#0a0a0f',
+                        'dark-card': '#1a1a2e',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
-<body id="page" class="loading loading2">
-    <nav id="navbar">
-        <div class="container">
-            <div id="navbarNav" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="account">My Account</a>
-                    </li>
+<body class="bg-dark-bg text-white overflow-x-hidden">
+    <!-- Animated Background (Canvas) -->
+    <div class="fixed inset-0 z-0">
+        <canvas id="starfieldCanvas" class="absolute inset-0"></canvas>
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-dark-bg to-blue-900/20"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-dark-bg/80 backdrop-blur-lg border-b border-neon-pink/20">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="assets/logo.png" alt="Just Dance Party Logo" class="h-10 w-auto mr-3">
+                    <span class="text-xl font-bold bg-gradient-to-r from-neon-pink to-neon-blue bg-clip-text text-transparent">
+                        Just Dance Party
+                    </span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#download" class="nav-link">Download</a>
+                </div>
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
-    <div id="content">
-        <div class="container">
-            <div class="background-layout"></div>
-            <div class="banner banner1">
-                <span class="title" style="color: #fff">Non-stop Dancing!</span>
-                <span class="subtitle" style="color: #fff">Just Dance Fire is a mod of Just Dance with over 700+ songs.
-                    It's available on Nintendo Switch and PC, offering personalized playlists and themes for a unique
-                    dance experience.</span>
-                <button onclick="ripple('.download'); window.location.href='download'"
-                    class="download">Download</button>
-                <button onclick="ripple('.contribute'); window.location.href='https:\/\/discord.gg/8hffEsusdM'"
-                    class="contribute">Our Discord!</button>
-                <img class="phone" src="assets/drawable/phone_dark.png" alt="Android">
-            </div>
-            <div class="banner news" style="display: none">
-                <span class=" banner-title">News</span>
-                <span class="subtitle">There is no new news, come back later! (rip english)</span>
-            </div>
-            <div class="banner advantages">
-                <span class=" banner-title">Advantages of JDFire 1.5</span>
-                <div class="container-grid"></div>
-            </div>
-            <div class="banner serverstats">
-                <span class="material-symbols-rounded" translate="no">developer_mode</span>
-                <span class=" banner-title">Server Status</span>
-                <span class=" banner-subtitle">Check the current server activity!</span>
-                <div class="infocontainer">
-                    <div class="panel left">
-                        <span class="title">Current Server Status:</span>
-                        <span class="serverstats">• Loading</span>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-dark-bg/95 backdrop-blur-lg">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
+            <a href="#home" class="nav-link" onclick="toggleMobileMenu()">Home</a>
+            <a href="#features" class="nav-link" onclick="toggleMobileMenu()">Features</a>
+            <a href="#download" class="nav-link" onclick="toggleMobileMenu()">Download</a>
+        </div>
+    </div>
+
+    <main class="relative z-10">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center pt-20">
+            <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8 animate-slide-up">
+                    <h1 class="text-5xl lg:text-7xl font-bold hero-title">
+                        Just Dance<br>
+                        <span class="text-gradient">Party</span>
+                    </h1>
+                    <p class="text-xl text-gray-300 leading-relaxed max-w-lg">
+                        Experience the ultimate dance game with over 700+ songs. Available on Nintendo Switch and PC
+                        with personalized playlists and exclusive content.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 mt-10">
+                        <button onclick="scrollToSection('download')" class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50">
+                            Get Started
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </button>
+                        <button onclick="scrollToSection('features')" class="btn-secondary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-blue/50">
+                            Learn More
+                        </button>
                     </div>
-                    <div class="panel right">
-                        <span class="title">Current Online Players Status:</span>
-                        <span class="OnlinePlayers">N/A</span>
+                </div>
+                <div class="flex justify-center lg:justify-end mt-12 lg:mt-0">
+                    <div class="dance-character relative w-full max-w-[280px] sm:max-w-xs md:max-w-sm lg:max-w-md xl:max-w-[420px] mx-auto lg:mx-0 animate-float">
+                        <img id="heroCoachImage" src="assets/hero/coach-1.png" alt="Dancing Coach" class="w-full h-auto object-contain transition-opacity duration-1000 ease-in-out opacity-0">
                     </div>
-                    <div class="panel bottom">
-                        <span class="title">Deploy Time</span>
-                    <span class="deployTime">N/A</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-gradient">
+                        Why Choose JDParty?
+                    </h2>
+                    <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                        Discover what makes Just Dance Party the ultimate dancing experience
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-on-scroll">
+                    <div class="feature-card animate-fade-in group transition-all duration-300 ease-in-out hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-neon-pink/30">
+                        <div class="feature-icon transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:text-neon-blue">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-neon-pink">World Dance Floor</h3>
+                        <p class="text-gray-300">Battle players and bots in cross-platform multiplayer. Climb to the top
+                            of global leaderboards!</p>
                     </div>
-                    
+
+                    <div class="feature-card animate-fade-in group transition-all duration-300 ease-in-out hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-neon-pink/30">
+                        <div class="feature-icon transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:text-neon-blue">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-neon-pink">Exclusive Content</h3>
+                        <p class="text-gray-300">Access songs unavailable on JD Unlimited or Just Dance+ with our
+                            exclusive map collection.</p>
+                    </div>
+
+                    <div class="feature-card animate-fade-in group transition-all duration-300 ease-in-out hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-neon-pink/30">
+                        <div class="feature-icon transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:text-neon-blue">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-neon-pink">Privacy First</h3>
+                        <p class="text-gray-300">Your data stays secure with our privacy-focused approach - no data
+                            collection or leaks.</p>
+                    </div>
+
+                    <div class="feature-card animate-fade-in group transition-all duration-300 ease-in-out hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-neon-pink/30">
+                        <div class="feature-icon transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:text-neon-blue">
+                            <i class="fab fa-osi"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-neon-pink">Open Source</h3>
+                        <p class="text-gray-300">Built on the OpenParty project with additional features and
+                            community-driven improvements.</p>
+                    </div>
+
+                    <div class="feature-card animate-fade-in group transition-all duration-300 ease-in-out hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-neon-pink/30">
+                        <div class="feature-icon transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:text-neon-blue">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-neon-pink">Leaderboards</h3>
+                        <p class="text-gray-300">Compete globally and track your progress with comprehensive ranking
+                            systems.</p>
+                    </div>
+
+                    <div class="feature-card animate-fade-in group transition-all duration-300 ease-in-out hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-neon-pink/30">
+                        <div class="feature-icon transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:text-neon-blue">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-neon-pink">Independent Ecosystem</h3>
+                        <p class="text-gray-300">Complete gaming ecosystem independent of Ubisoft servers for maximum
+                            reliability.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots Section -->
+        <section id="screenshots" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-gradient">
+                        In-Game Screenshots
+                    </h2>
+                    <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                        See Just Dance Party in action!
+                    </p>
+                </div>
+
+                <div class="relative screenshot-gallery-container">
+                    <div class="screenshot-gallery-inner">
+                        <!-- Duplicate content for seamless loop -->
+                        <div class="screenshot-item">
+                            <img src="assets/screenshots/screenshot-1.jpg" alt="Screenshot 1">
+                            <div class="screenshot-overlay">
+                                <h3 class="text-xl font-bold text-white">World Dance Floor</h3>
+                                <p class="text-sm text-gray-300">Beat another player from all country at the same time!.</p>
+                            </div>
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/screenshots/screenshot-2.jpg" alt="Screenshot 2">
+                            <div class="screenshot-overlay">
+                                <h3 class="text-xl font-bold text-white">New Exclusive Content</h3>
+                                <p class="text-sm text-gray-300">Play an Just Dance Party maps that doesnt exist on another mod.</p>
+                            </div>
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/screenshots/screenshot-3.jpg" alt="Screenshot 3">
+                            <div class="screenshot-overlay">
+                                <h3 class="text-xl font-bold text-white">Personalized Playlists</h3>
+                                <p class="text-sm text-gray-300">For JD18 Users and below, you could get an personalized song based of history.</p>
+                            </div>
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/screenshots/screenshot-4.jpg" alt="Screenshot 4">
+                            <div class="screenshot-overlay">
+                                <h3 class="text-xl font-bold text-white">Weekly Playlists</h3>
+                                <p class="text-sm text-gray-300">Curate your perfect dance sessions.</p>
+                            </div>
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/screenshots/screenshot-5.jpg" alt="Screenshot 5">
+                            <div class="screenshot-overlay">
+                                <h3 class="text-xl font-bold text-white">Multi-platform support</h3>
+                                <p class="text-sm text-gray-300">The mod support various just dance game (JD17-JD22)</p>
+                            </div>
+                        </div>
+                        <!-- Duplicate content for seamless loop -->
+                        <div class="screenshot-item">
+                            <img src="assets/screenshots/screenshot-1.jpg" alt="Screenshot 1">
+                            <div class="screenshot-overlay">
+                                <h3 class="text-xl font-bold text-white">World Dance Floor</h3>
+                                <p class="text-sm text-gray-300">Beat another player from all country at the same time!.</p>
+                            </div>
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/screenshots/screenshot-2.jpg" alt="Screenshot 2">
+                            <div class="screenshot-overlay">
+                                <h3 class="text-xl font-bold text-white">New Exclusive Content</h3>
+                                <p class="text-sm text-gray-300">Play an Just Dance Party maps that doesnt exist on another mod.</p>
+                            </div>
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/screenshots/screenshot-3.jpg" alt="Screenshot 3">
+                            <div class="screenshot-overlay">
+                                <h3 class="text-xl font-bold text-white">Personalized Playlists</h3>
+                                <p class="text-sm text-gray-300">For JD18 Users and below, you could get an personalized song based of history.</p>
+                            </div>
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/screenshots/screenshot-4.jpg" alt="Screenshot 4">
+                            <div class="screenshot-overlay">
+                                <h3 class="text-xl font-bold text-white">Weekly Playlists</h3>
+                                <p class="text-sm text-gray-300">Curate your perfect dance sessions.</p>
+                            </div>
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/screenshots/screenshot-5.jpg" alt="Screenshot 5">
+                            <div class="screenshot-overlay">
+                                <h3 class="text-xl font-bold text-white">Multi-platform support</h3>
+                                <p class="text-sm text-gray-300">The mod support various just dance game (JD17-JD22)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-gradient">
+                        Get Started
+                    </h2>
+                    <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                        Choose your platform and follow the installation guide
+                    </p>
+                </div>
+
+                <!-- Platform Tabs -->
+                <div class="flex flex-wrap justify-center gap-4 mb-8" id="main-platform-tabs">
+                    <button class="platform-tab-item active" data-platform-group="pc">
+                        <i class="fas fa-desktop fa-fw mr-2"></i>
+                        PC
+                    </button>
+                    <button class="platform-tab-item" data-platform-group="switch">
+                        <i class="fab fa-nintendo-switch fa-fw mr-2"></i>
+                        Nintendo Switch
+                    </button>
+                    <button class="platform-tab-item" data-platform-group="other">
+                        <i class="fas fa-gamepad fa-fw mr-2"></i>
+                        Another Console
+                    </button>
+                </div>
+
+                <!-- Platform Content -->
+                <div id="pc-platform-group" class="platform-group-content active animate-on-scroll">
+                    <div class="flex flex-wrap justify-center gap-4 mb-12" id="pc-sub-tabs">
+                        <button class="platform-tab-item active" data-platform="pc-steam">Steam</button>
+                        <button class="platform-tab-item" data-platform="pc-uplay">Uplay</button>
+                        <button class="platform-tab-item" data-platform="pc-crack">Cracked</button>
+                    </div>
+                    <div class="platform-content-container">
+                        <!-- PC Steam -->
+                        <div id="pc-steam" class="platform-content active">
+                            <div class="max-w-4xl mx-auto bg-dark-card/50 backdrop-blur-lg rounded-3xl p-8 border border-neon-pink/20 text-gray-300">
+                                <h3 class="text-2xl font-bold mb-6 text-center text-neon-pink">PC (Steam) - Just Dance 2017</h3>
+                                <div class="space-y-6">
+                                    <div>
+                                        <h4 class="text-xl font-semibold mb-3 text-neon-blue">1. Installation:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 pl-4">
+                                            <li>Download the JDParty executable file (click button below).</li>
+                                            <li>Locate your Just Dance installation and find the file called 'JD2017.exe'. Replace it with the JDParty executable file you downloaded. (On Steam: Right-click Just Dance 2017 > Manage > Browse Local Files).</li>
+                                            <li>Launch the game.</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-semibold mb-3 text-neon-blue">2. Notes:</h4>
+                                        <ul class="list-disc list-inside space-y-2 pl-4">
+                                            <li>Steam might revert the mod changes if you verify game files or if Ubisoft issues an update (this is rare).</li>
+                                            <li>This method only works with a legitimate Steam copy of Just Dance 2017.</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-semibold mb-3 text-neon-blue">3. Download:</h4>
+                                        <div class="mt-4 text-center">
+                                            <button class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="downloadPlatformAsset('pc-steam-files')">Download Steam Mod Files</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PC Uplay -->
+                        <div id="pc-uplay" class="platform-content hidden">
+                            <div class="max-w-4xl mx-auto bg-dark-card/50 backdrop-blur-lg rounded-3xl p-8 border border-neon-pink/20 text-gray-300">
+                                <h3 class="text-2xl font-bold mb-6 text-center text-neon-pink">PC (Uplay/Ubisoft Connect) - Just Dance 2017</h3>
+                                <div class="space-y-6">
+                                    <div>
+                                        <h4 class="text-xl font-semibold mb-3 text-neon-blue">1. Installation:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 pl-4">
+                                            <li>Download the JDParty executable file (click button below).</li>
+                                            <li>Locate your Just Dance installation and find the file called 'JD2017.exe'. Replace it with the JDParty executable file you downloaded. (In Ubisoft Connect: Go to Game Properties > Local Files > Open Folder).</li>
+                                            <li>Launch the game.</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-semibold mb-3 text-neon-blue">2. Notes:</h4>
+                                        <ul class="list-disc list-inside space-y-2 pl-4">
+                                            <li>Ubisoft Connect might revert the mod changes if you verify game files or if an update is released (this is rare).</li>
+                                            <li>This method only works with a legitimate Ubisoft Connect copy of Just Dance 2017.</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-semibold mb-3 text-neon-blue">3. Download:</h4>
+                                        <div class="mt-4 text-center">
+                                            <button class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="downloadPlatformAsset('pc-uplay-files')">Download Uplay Mod Files</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PC Cracked -->
+                        <div id="pc-crack" class="platform-content hidden">
+                            <div class="max-w-4xl mx-auto bg-dark-card/50 backdrop-blur-lg rounded-3xl p-8 border border-neon-pink/20 text-gray-300">
+                                <h3 class="text-2xl font-bold mb-6 text-center text-neon-pink">PC (Cracked) - Just Dance 2017</h3>
+                                <div class="space-y-6">
+                                    <div>
+                                        <h4 class="text-xl font-semibold mb-3 text-neon-blue">1. Installation:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 pl-4">
+                                            <li>Download the JDParty executable file and the uplay_r1_loader.dll (click buttons below).</li>
+                                            <li>Locate your Just Dance installation directory. Replace the original 'JD2017.exe' with the JDParty executable you downloaded. Place the 'uplay_r1_loader.dll' in the same directory.</li>
+                                            <li>Generate authentication files using the "Generate Auth" button below.</li>
+                                            <li>Copy the generated .ini authentication files into your Just Dance 2017 installation directory.</li>
+                                            <li>Launch the game using the new JD2017.exe.</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-semibold mb-3 text-neon-blue">2. Notes:</h4>
+                                        <ul class="list-disc list-inside space-y-2 pl-4">
+                                            <li>This method typically works with specific cracked versions of the game (e.g., by Delusional).</li>
+                                            <li>Security software (antivirus, firewall, VPN, browser extensions) may flag or block the downloads. These are generally false positives and can be safely ignored if you trust the source.</li>
+                                            <li>It's highly recommended to back up your original game executable ('JD2017.exe') before replacing it.</li>
+                                            <li>The authentication files (.ini) are required for the cracked version to connect to JDParty servers.</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-semibold mb-3 text-neon-blue">3. Actions:</h4>
+                                        <div class="mt-4 space-y-3 md:space-y-0 md:flex md:gap-4 md:justify-center">
+                                            <button class="btn-primary w-full md:w-auto transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="downloadPlatformAsset('cracked-jd2017exe')">Download JD2017.exe</button>
+                                            <button class="btn-primary w-full md:w-auto transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="downloadPlatformAsset('cracked-uplayr1loader')">Download uplay_r1_loader.dll</button>
+                                            <button class="btn-secondary w-full md:w-auto transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-blue/50" onclick="openAuthModal()">Generate Auth Files</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="switch-platform-group" class="platform-group-content hidden animate-on-scroll">
+                    <div class="flex flex-wrap justify-center gap-4 mb-12" id="switch-sub-tabs">
+                        <button class="platform-tab-item active" data-platform="nx-dns">DNS</button>
+                        <button class="platform-tab-item" data-platform="nx-patched">Patched Game</button>
+                        <button class="platform-tab-item" data-platform="nx-cert">DNS (Hacked Switch)</button>
+                    </div>
+                    <div class="platform-content-container">
+                        <!-- Switch DNS -->
+                        <div id="nx-dns" class="platform-content active">
+                            <div class="max-w-4xl mx-auto bg-dark-card/50 backdrop-blur-lg rounded-3xl p-8 border border-neon-pink/20">
+                                <h3 class="text-2xl font-bold mb-8 text-center text-neon-pink">Nintendo Switch (DNS) - JD19-22</h3>
+                                <ol class="list-decimal list-inside space-y-3 text-gray-300 mb-6 pl-4">
+                                    <li>Configure your Nintendo Switch's primary DNS to our custom server address (details provided in the guide).</li>
+                                    <li>Launch Just Dance 2019, 2020, 2021, or 2022.</li>
+                                    <li>Enjoy JDParty features automatically!</li>
+                                </ol>
+                                <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mb-6">
+                                    <p class="text-blue-300 text-center">ℹ️ Compatible with Just Dance 2019, 2020, 2021, and 2022 only. No console modification needed.</p>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="downloadPlatformAsset('nx-dns-guide')">View DNS Guide</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Switch Patched -->
+                        <div id="nx-patched" class="platform-content hidden">
+                            <div class="max-w-4xl mx-auto bg-dark-card/50 backdrop-blur-lg rounded-3xl p-8 border border-neon-pink/20">
+                                <h3 class="text-2xl font-bold mb-8 text-center text-neon-pink">Nintendo Switch (Patched Game)</h3>
+                                 <ol class="list-decimal list-inside space-y-3 text-gray-300 mb-6 pl-4">
+                                    <li>Download the pre-patched XCI or NSP game file for your desired Just Dance title.</li>
+                                    <li>Install the game file onto your Switch using your preferred Custom Firmware (CFW) installer.</li>
+                                    <li>Launch the game. It should auto-connect to JDParty servers.</li>
+                                </ol>
+                                <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-6">
+                                    <p class="text-red-300 text-center">⚠️ Requires a Nintendo Switch with Custom Firmware (CFW) installed. Understand the risks associated with CFW before proceeding.</p>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="downloadPlatformAsset('nx-patched-game')">Download Patched Game Files</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Switch Cert (DNS Hacked Switch) -->
+                        <div id="nx-cert" class="platform-content hidden">
+                            <div class="max-w-4xl mx-auto bg-dark-card/50 backdrop-blur-lg rounded-3xl p-8 border border-neon-pink/20">
+                                <h3 class="text-2xl font-bold mb-8 text-center text-neon-pink">Nintendo Switch (DNS via Certificate Bypass - Hacked Switch)</h3>
+                                <ol class="list-decimal list-inside space-y-3 text-gray-300 mb-6 pl-4">
+                                    <li>Download the required certificate bypass files.</li>
+                                    <li>Place these files onto your Switch's SD card in the specified directory structure (usually related to your CFW's Atmosphere or ReiNX setup).</li>
+                                    <li>Ensure your Switch's DNS settings are set to automatic or your standard internet DNS.</li>
+                                    <li>Launch Just Dance 2019-2022. The bypass should redirect traffic to JDParty servers.</li>
+                                </ol>
+                                <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-6">
+                                    <p class="text-red-300 text-center">⚠️ Requires a Nintendo Switch with Custom Firmware (CFW). This method is for Just Dance 2019-2022. Use with caution.</p>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="downloadPlatformAsset('nx-cert-files')">Download Certificate Files</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="other-platform-group" class="platform-group-content hidden animate-on-scroll">
+                    <div class="max-w-4xl mx-auto bg-dark-card/50 backdrop-blur-lg rounded-3xl p-8 border border-neon-pink/20">
+                        <h3 class="text-2xl font-bold mb-8 text-center text-neon-pink">Other Consoles</h3>
+                        <p class="text-center text-gray-300">Information and guides for other consoles will be added here as they become available. Stay tuned!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Auth Generator Modal -->
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div
+                class="bg-dark-card/95 backdrop-blur-lg rounded-3xl p-8 max-w-2xl w-full border border-neon-pink/30 relative">
+                <button onclick="closeAuthModal()"
+                    class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">×</button>
+
+                <h3 class="text-2xl font-bold mb-6 text-center text-gradient">Account Generator</h3>
+                <p class="text-gray-300 text-center mb-8">Generate authentication files for Just Dance Party</p>
+
+                <div class="flex gap-4 mb-8 justify-center">
+                    <button class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="initNewAccount()">Create New Account</button>
+                    <button class="btn-secondary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-blue/50" onclick="editExistingAccount()">Edit Existing</button>
+                </div>
+
+                <div id="account-form" class="hidden space-y-6">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-neon-blue mb-2 font-medium">Username</label>
+                            <input type="text" id="username" class="form-input"
+                                placeholder="Enter username (min 3 chars)">
+                        </div>
+                        <div class="hidden">
+                            <label class="block text-neon-blue mb-2 font-medium">Email</label>
+                            <input type="email" id="email" class="form-input" placeholder="user@example.com">
+                        </div>
+                        <div class="hidden">
+                            <label class="block text-neon-blue mb-2 font-medium">Password</label>
+                            <input type="password" id="password" class="form-input"
+                                placeholder="Generated automatically">
+                        </div>
+                        <div>
+                            <label class="block text-neon-blue mb-2 font-medium">Language</label>
+                            <select id="language" class="form-input">
+                                <option value="en-US">English</option>
+                                <option value="fr-FR">French</option>
+                                <option value="it-IT">Italian</option>
+                                <option value="de-DE">German</option>
+                                <option value="es-ES">Spanish - Spain</option>
+                                <option value="zh-CN">Simplified Chinese</option>
+                                <option value="zh-TW">Traditional Chinese</option>
+                                <option value="da-DK">Danish</option>
+                                <option value="fi-FI">Finnish</option>
+                                <option value="no-NO">Norwegian</option>
+                                <option value="nl-NL">Dutch</option>
+                                <option value="pt-BR">Portuguese - Brazil</option>
+                                <option value="ru-RU">Russian</option>
+                                <option value="sv-SE">Swedish</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="warning-text" class="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 hidden">
+                        <p class="text-yellow-300 text-center">⚠️ Changing UUID can delete all SaveFiles!</p>
+                    </div>
+
+                    <div class="flex gap-4 justify-center">
+                        <button class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" id="generate-btn" onclick="generateAccount()">Generate
+                            Account</button>
+                        <button class="btn-secondary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-blue/50" onclick="toggleOutputVisibility()">Toggle Output</button>
+                    </div>
+
+                    <div id="download-buttons" class="hidden flex gap-4 justify-center">
+                        <button class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" id="download-jdp">Download JDParty Auth</button>
+                        <button class="btn-secondary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-blue/50" id="download-uplay">Download Uplay Auth</button>
+                    </div>
+                    <div id="save-button-container" class="flex gap-4 justify-center"></div>
+                </div>
+
+                <div class="mt-8 hidden" id="output-container">
+                    <div class="bg-black/50 rounded-lg p-4 border border-green-500/30">
+                        <textarea id="output"
+                            class="w-full h-32 bg-transparent text-green-400 font-mono text-sm resize-none outline-none"
+                            readonly placeholder="Console output will appear here..."></textarea>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark-card/50 backdrop-blur-lg py-12 border-t border-neon-pink/20 mt-20 relative">
+        <div class="container mx-auto px-6 text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <!-- Logo and Description -->
+                <div class="flex flex-col items-center md:items-start">
+                    <div class="flex items-center mb-4">
+                        <img src="assets/logo.png" alt="Just Dance Party Logo" class="h-10 w-auto mr-3">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-neon-pink to-neon-blue bg-clip-text text-transparent -ml-1">
+                            Just Dance Party
+                        </span>
+                    </div>
+                    <p class="text-gray-300 mb-4 max-w-xs">
+                        Experience the ultimate dance game with over 700+ songs.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://discord.gg/dKMVNTcy9x" target="_blank" rel="noopener noreferrer" class="footer-social-icon">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="footer-social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="footer-social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-xl font-bold text-neon-blue mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="footer-link">Home</a></li>
+                        <li><a href="#features" class="footer-link">Features</a></li>
+                        <li><a href="#download" class="footer-link">Download</a></li>
+                        <li><a href="about.html" class="footer-link">About Us</a></li>
+                        <li><a href="404.html" class="footer-link">Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact/Legal -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-xl font-bold text-neon-blue mb-6">Legal & Contact</h4>
+                    <ul class="space-y-3">
+                        <li><a href="privacy-policy.html" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html" class="footer-link">Terms of Service</a></li>
+                        <li><a href="mailto:support@jdparty.com" class="footer-link">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-neon-pink/10 pt-8 mt-8 text-gray-400 text-sm">
+                <p class="mb-2">&copy; 2024 Just Dance Party. All rights reserved.</p>
+                <p>Built with ❤️ for the dance community. Based on OpenParty project • Safe • Secure • Open Source</p>
+            </div>
+        </div>
+
+        <!-- Back to Top Button -->
+        <button id="back-to-top" class="back-to-top-btn">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
