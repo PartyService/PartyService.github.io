@@ -1,13 +1,13 @@
 // Utility Functions
 function generateUUID() { // Public Domain/MIT
-    var d = new Date().getTime();//Timestamp
-    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+    var d = new Date().getTime();
+    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16;//random number between 0 and 16
-        if (d > 0) {//Use timestamp until depleted
+        var r = Math.random() * 16;
+        if (d > 0) {
             r = (d + r) % 16 | 0;
             d = Math.floor(d / 16);
-        } else {//Use microseconds since page-load if supported
+        } else {
             r = (d2 + r) % 16 | 0;
             d2 = Math.floor(d2 / 16);
         }
@@ -98,15 +98,31 @@ function downloadGeneratedFile(content, filename) {
 
 function downloadPlatformAsset(assetKey) {
     logOutput(`[PlatformDownload] User requested download for: ${assetKey}`);
-    alert(`Initiating download for ${assetKey}.\n(This is a placeholder. Actual download links would be configured here.)`);
-    // In a real scenario, you would map assetKey to a URL and navigate or use a file-specific download method.
+
+    const downloadUrls = {
+        'cracked-jd2017exe': 'https://drive.google.com/drive/folders/18eNOR-jfB7PY93bf6B2ZgTAkMZF7a1JV?usp=sharing',
+        'cracked-uplayr1loader': 'https://drive.google.com/drive/folders/18eNOR-jfB7PY93bf6B2ZgTAkMZF7a1JV?usp=sharing',
+        'pc-steam-files': 'https://drive.google.com/file/d/1xzQBfXKW4yXaI_gzlhJkhSOok_5hTJUD/view?usp=drive_link',
+        'pc-uplay-files': 'https://drive.google.com/file/d/1RFW75s-_aKT-RIMsiihsHauqfas3FZcE/view?usp=drive_link',
+        'nx-dns-guide': '', // Example guide URL
+    };
+
+    const url = downloadUrls[assetKey];
+
+    if (url) {
+        logOutput(`[PlatformDownload] Redirecting to: ${url}`);
+        window.open(url, '_blank');
+    } else {
+        logOutput(`[PlatformDownload] Download for ${assetKey} is currently unavailable.`);
+        alert(`The download for '${assetKey}' is currently unavailable or is not a direct download. Please check back later.`);
+    }
 }
 // Main Function to Generate File
 function generateFile() {
     const username = document.getElementById("username").value.trim();
-    const email = document.getElementById("email").value.trim(); // Email is now hidden, but its value is pre-filled
-    const password = document.getElementById("password").value.trim(); // Password is now hidden, but its value is pre-filled
-    const savePath = "Appdata"; // Hardcode savePath as it's hidden/not in UI
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const savePath = "Appdata";
     const language = document.getElementById("language").value.trim();
 
     if (!validateForm(username, email, password)) return;
@@ -118,27 +134,16 @@ function generateFile() {
     logOutput("============");
     logOutput("Entering these Credentials into mods other than jdparty may result in these credentials being leaked.");
 
-    // Attach download actions
     document.getElementById('download-jdp').onclick = () => downloadGeneratedFile(obfuscatedContent, "jdparty_auth.ini");
     document.getElementById('download-uplay').onclick = () => downloadGeneratedFile(rawContent, "uplay.ini");
-    // The '.generateb' class is on the button that triggers generateFile,
-    // and its parent is already the form. The 'downloadable' class might be for styling.
-    // If it's meant to apply to the download buttons, it should be applied to them directly.
-    // For now, I'll assume it's not critical or needs further clarification.
-    // document.querySelector('.generateb').parentNode.classList.add('downloadable');
 }
 
 // Initialize Account Generator Form
 function InitAuthGen() {
-
-    // Reset form values for new account generation
     document.getElementById("username").value = "";
     document.getElementById("email").value = `user${Math.round(Date.now() * Math.random() / 1000)}@jdparty.xyz`;
     document.getElementById("password").value = generatePassword();
-    // document.getElementById("savePath").value = "Default"; // savePath is now hardcoded in generateFile
     document.getElementById("language").value = "en-US";
-
-    // Reset output and buttons for download
     document.querySelector('.download.jdp').onclick = null;
     document.querySelector('.download.uplay').onclick = null;
     document.querySelector('.generateb').onclick = () => generateFile();
@@ -192,7 +197,6 @@ function EditData() {
                 document.getElementById("username").value = data.Username || "";
                 document.getElementById("email").value = data.Email || "";
                 document.getElementById("password").value = data.Password ? toStr(data.Password) : "";
-                // document.getElementById("savePath").value = data.SavePath || "Default"; // savePath is now hardcoded in generateFile
                 document.getElementById("language").value = data.Language || "en-US";
                 logOutput(`[UserGen] Loaded data from ${file.name}`);
                 prepareSaveButton(file.name, data, file.name === "jdparty_auth.ini");
@@ -224,20 +228,20 @@ function parseIniFile(content) {
 
 // Prepare Save Button to Rewrite Existing File
 function prepareSaveButton(filename, data, isBase64) {
-    document.getElementById('generate-btn').style.display = "none"; // Correctly hide the generate button
+    document.getElementById('generate-btn').style.display = "none";
     const saveButtonContainer = document.getElementById("save-button-container");
-    if (saveButtonContainer) saveButtonContainer.innerHTML = ''; // Clear the container before adding new button
+    if (saveButtonContainer) saveButtonContainer.innerHTML = '';
 
     const saveButton = document.createElement("button");
     saveButton.textContent = "Save";
     saveButton.type = "button";
-    saveButton.classList.add("btn-primary", "transition-all", "duration-300", "ease-in-out", "hover:brightness-125", "hover:-translate-y-1", "hover:shadow-lg", "hover:shadow-neon-pink/50"); // Add primary button styling
+    saveButton.classList.add("btn-primary", "transition-all", "duration-300", "ease-in-out", "hover:brightness-125", "hover:-translate-y-1", "hover:shadow-lg", "hover:shadow-neon-pink/50");
 
     saveButton.onclick = () => {
         let updatedContent = `Username=${document.getElementById("username").value}\n` +
             `Email=${document.getElementById("email").value}\n` +
             `Password=${toObfs(document.getElementById("password").value)}\n` +
-            `SavePath=${data.SavePath || "Default"}\n` + /* Use existing data's SavePath or default */
+            `SavePath=${data.SavePath || "Default"}\n` +
             `Language=${document.getElementById("language").value}\n` +
             `UserId=${data.UserId || ""}\n` +
             `TickedId=${data.TickedId || ""}`;
@@ -280,7 +284,6 @@ function toggleMobileMenu() {
 
 function scrollToSection(id) {
     document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    // Close mobile menu if open
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenu.classList.contains('is-active')) {
         mobileMenu.classList.remove('is-active');
@@ -289,12 +292,10 @@ function scrollToSection(id) {
 
 function openAuthModal() {
     document.getElementById('auth-modal').classList.remove('hidden');
-    // Reset form and output when opening modal
     document.getElementById("username").value = "";
-    document.getElementById("username").disabled = false; // Ensure username is enabled
+    document.getElementById("username").disabled = false;
     document.getElementById("email").value = `user${Math.round(Date.now() * Math.random() / 1000)}@jdparty.xyz`;
     document.getElementById("password").value = generatePassword();
-    // document.getElementById("savePath").value = "Default"; // savePath is now hardcoded in generateFile
     document.getElementById("language").value = "en-US";
     document.getElementById("password").disabled = false;
     document.getElementById("output").value = "";
@@ -303,7 +304,7 @@ function openAuthModal() {
     document.getElementById("generate-btn").style.display = "inline-block";
     document.getElementById("download-buttons").classList.add("hidden");
     const saveButtonContainer = document.getElementById("save-button-container");
-    if (saveButtonContainer) saveButtonContainer.innerHTML = ''; // Clear the container
+    if (saveButtonContainer) saveButtonContainer.innerHTML = '';
 }
 
 function closeAuthModal() {
@@ -315,14 +316,14 @@ function initNewAccount() {
     document.getElementById("warning-text").classList.add("hidden");
     document.getElementById("password").disabled = false;
     document.getElementById("username").value = "";
-    document.getElementById("username").disabled = false; // Ensure username is enabled
+    document.getElementById("username").disabled = false;
     document.getElementById("email").value = `user${Math.round(Date.now() * Math.random() / 1000)}@jdparty.xyz`;
     document.getElementById("password").value = generatePassword();
     document.getElementById("language").value = "en-US";
     document.getElementById("generate-btn").style.display = "inline-block";
     document.getElementById("download-buttons").classList.add("hidden");
     const saveButtonContainer = document.getElementById("save-button-container");
-    if (saveButtonContainer) saveButtonContainer.innerHTML = ''; // Clear the container
+    if (saveButtonContainer) saveButtonContainer.innerHTML = '';
     document.getElementById("output").value = "";
 }
 
@@ -332,12 +333,12 @@ function editExistingAccount() {
     document.getElementById("generate-btn").style.display = "none";
     document.getElementById("download-buttons").classList.add("hidden");
     document.getElementById("output").value = "";
-    document.getElementById("username").disabled = false; // Ensure username is enabled when editing
-    EditData(); // Call the existing EditData function
+    document.getElementById("username").disabled = false;
+    EditData();
 }
 
 function generateAccount() {
-    generateFile(); // Call the existing generateFile function
+    generateFile();
     document.getElementById("download-buttons").classList.remove("hidden");
 }
 
@@ -360,12 +361,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mainPlatformTabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            // Deactivate all main tabs and hide all groups
             mainPlatformTabs.forEach(t => t.classList.remove('active'));
             platformGroupContents.forEach(content => content.classList.add('hidden'));
             platformGroupContents.forEach(content => content.classList.remove('active'));
 
-            // Activate clicked main tab and show its group
             tab.classList.add('active');
             const targetGroupSelector = tab.dataset.platformGroup;
             const targetGroup = document.getElementById(`${targetGroupSelector}-platform-group`);
@@ -373,7 +372,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 targetGroup.classList.remove('hidden');
                 targetGroup.classList.add('active');
 
-                // Activate the first sub-tab within the newly active group
                 const firstSubTab = targetGroup.querySelector('.platform-tab-item');
                 if (firstSubTab) {
                     const subTabsInGroup = targetGroup.querySelectorAll('.platform-tab-item');
@@ -420,25 +418,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initialize scroll animations
     initScrollAnimations();
-
-    // Initialize Hero Image Slider
     initHeroImageSlider();
-    // Initialize starfield
     initStarfield();
 
-    // Back to Top Button functionality
     const backToTopButton = document.getElementById('back-to-top');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) { // Show button after scrolling 300px
+        if (window.scrollY > 300) {
             backToTopButton.classList.add('show');
         } else {
             backToTopButton.classList.remove('show');
         }
     });
 
-    // Add click listener for back-to-top button
     if (backToTopButton) {
         backToTopButton.addEventListener('click', scrollToTop);
     }
@@ -451,24 +443,21 @@ function initScrollAnimations() {
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Determine which animation to apply based on the element
                 if (entry.target.classList.contains('grid') && entry.target.classList.contains('animate-on-scroll')) {
-                    // For the feature cards grid, apply fade-in to children
                     const featureCards = entry.target.querySelectorAll('.feature-card');
                     featureCards.forEach((card, index) => {
-                        card.style.animationDelay = `${index * 0.1}s`; // Stagger animation
+                        card.style.animationDelay = `${index * 0.1}s`;
                         card.classList.add('animate-fade-in');
                     });
                 } else {
-                    // For other sections, apply slide-up
                     entry.target.classList.add('animate-slide-up');
                 }
-                observer.unobserve(entry.target); // Stop observing once animated
+                observer.unobserve(entry.target);
             }
         });
     }, {
-        threshold: 0.1, // Trigger when 10% of the element is visible
-        rootMargin: '0px 0px -50px 0px' // Adjust when element is 50px from bottom of viewport
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     });
 
     elementsToAnimate.forEach(element => {
@@ -482,7 +471,7 @@ function initStarfield() {
     const ctx = canvas.getContext('2d');
 
     let stars = [];
-    const numStars = 500; // Number of stars
+    const numStars = 500;
 
     function resizeCanvas() {
         canvas.width = window.innerWidth;
@@ -495,39 +484,35 @@ function initStarfield() {
             stars.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                z: Math.random() * canvas.width, // Z-depth for parallax
-                size: Math.random() * 2 + 0.5, // Star size
-                speed: Math.random() * 0.5 + 0.1 // Star speed
+                z: Math.random() * canvas.width,
+                size: Math.random() * 2 + 0.5,
+                speed: Math.random() * 0.5 + 0.1
             });
         }
     }
 
     function drawStars() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         for (let i = 0; i < numStars; i++) {
             const star = stars[i];
 
-            // Update star position
             star.z -= star.speed;
 
-            // If star goes off screen, reset it
             if (star.z <= 0) {
                 star.z = canvas.width;
                 star.x = Math.random() * canvas.width;
                 star.y = Math.random() * canvas.height;
             }
 
-            // Calculate perspective
             const scale = canvas.width / star.z;
             const x = star.x * scale;
             const y = star.y * scale;
             const size = star.size * scale;
 
-            // Draw star
             ctx.beginPath();
             ctx.arc(x, y, size / 2, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 255, 255, ${scale * 0.5})`; // Fade out smaller/further stars
+            ctx.fillStyle = `rgba(255, 255, 255, ${scale * 0.5})`;
             ctx.fill();
         }
     }
@@ -537,15 +522,13 @@ function initStarfield() {
         requestAnimationFrame(animate);
     }
 
-    // Initial setup
     resizeCanvas();
     createStars();
     animate();
 
-    // Handle window resize
     window.addEventListener('resize', () => {
         resizeCanvas();
-        createStars(); // Recreate stars on resize to fill new dimensions
+        createStars();
     });
 }
 
@@ -565,7 +548,6 @@ function initHeroImageSlider() {
     ];
     let currentImageIndex = 0;
 
-    // Preload images
     coachImages.forEach(src => {
         const img = new Image();
         img.src = src;
@@ -573,17 +555,16 @@ function initHeroImageSlider() {
 
     function changeImage() {
         currentImageIndex = (currentImageIndex + 1) % coachImages.length;
-        coachImageElement.style.opacity = 0; // Start fade out
+        coachImageElement.style.opacity = 0;
 
         setTimeout(() => {
             coachImageElement.src = coachImages[currentImageIndex];
-            coachImageElement.style.opacity = 1; // Start fade in (CSS transition handles the animation)
-        }, 1000); // This timeout should match the opacity transition duration (1000ms)
+            coachImageElement.style.opacity = 1;
+        }, 1000);
     }
 
-    // Set initial image and make it visible after a brief moment
     coachImageElement.src = coachImages[currentImageIndex];
-    setTimeout(() => { coachImageElement.style.opacity = 1; }, 100); // Fade in the first image
+    setTimeout(() => { coachImageElement.style.opacity = 1; }, 100);
 
-    setInterval(changeImage, 5000); // Change image every 5 seconds (1s fade-out + 1s fade-in + 3s display)
+    setInterval(changeImage, 5000);
 }

@@ -391,7 +391,7 @@
                                         <h4 class="text-xl font-semibold mb-3 text-neon-blue">3. Actions:</h4>
                                         <div class="mt-4 space-y-3 md:space-y-0 md:flex md:gap-4 md:justify-center">
                                             <button class="btn-primary w-full md:w-auto transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="downloadPlatformAsset('cracked-jd2017exe')">Download JD2017.exe</button>
-                                            <button class="btn-primary w-full md:w-auto transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="downloadPlatformAsset('cracked-uplayr1loader')">Download uplay_r1_loader.dll</button>
+                                            <button class="btn-primary w-full md:w-auto transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" style="display: none;" onclick="downloadPlatformAsset('cracked-uplayr1loader')">Download uplay_r1_loader.dll</button>
                                             <button class="btn-secondary w-full md:w-auto transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-blue/50" onclick="openAuthModal()">Generate Auth Files</button>
                                         </div>
                                     </div>
@@ -403,62 +403,43 @@
 
                 <div id="switch-platform-group" class="platform-group-content hidden animate-on-scroll">
                     <div class="flex flex-wrap justify-center gap-4 mb-12" id="switch-sub-tabs">
-                        <button class="platform-tab-item active" data-platform="nx-dns">DNS</button>
-                        <button class="platform-tab-item" data-platform="nx-patched">Patched Game</button>
-                        <button class="platform-tab-item" data-platform="nx-cert">DNS (Hacked Switch)</button>
+                        <button class="platform-tab-item active" data-platform="nx-dns">DNS (Un-hacked Switch)</button>
+                        <button class="platform-tab-item" data-platform="nx-cfw">CFW Method (Hacked Switch)</button>
                     </div>
                     <div class="platform-content-container">
                         <!-- Switch DNS -->
                         <div id="nx-dns" class="platform-content active">
                             <div class="max-w-4xl mx-auto bg-dark-card/50 backdrop-blur-lg rounded-3xl p-8 border border-neon-pink/20">
-                                <h3 class="text-2xl font-bold mb-8 text-center text-neon-pink">Nintendo Switch (DNS) - JD19-22</h3>
+                                <h3 class="text-2xl font-bold mb-8 text-center text-neon-pink">Nintendo Switch (DNS Method)</h3>
                                 <ol class="list-decimal list-inside space-y-3 text-gray-300 mb-6 pl-4">
-                                    <li>Configure your Nintendo Switch's primary DNS to our custom server address (details provided in the guide).</li>
-                                    <li>Launch Just Dance 2019, 2020, 2021, or 2022.</li>
-                                    <li>Enjoy JDParty features automatically!</li>
+                                    <li>On your Nintendo Switch, go to System Settings > Internet > Internet Settings.</li>
+                                    <li>Select your current Wi-Fi network and choose "Change Settings".</li>
+                                    <li>Set "DNS Settings" to "Manual".</li>
+                                    <li>Set the "Primary DNS" to the server address provided in the guide. Leave the Secondary DNS blank.</li>
+                                    <li>Save the settings and launch Just Dance 2019.</li>
                                 </ol>
                                 <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mb-6">
-                                    <p class="text-blue-300 text-center">ℹ️ Compatible with Just Dance 2019, 2020, 2021, and 2022 only. No console modification needed.</p>
+                                    <p class="text-blue-300 text-center">ℹ️ This method is compatible with <strong class="font-bold text-white">Just Dance 2019 only</strong> and does not require console modifications.</p>
                                 </div>
                                 <div class="text-center">
-                                    <button class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="downloadPlatformAsset('nx-dns-guide')">View DNS Guide</button>
+                                    <button class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="downloadPlatformAsset('nx-dns-guide')">View Full DNS Guide</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Switch Patched -->
-                        <div id="nx-patched" class="platform-content hidden">
-                            <div class="max-w-4xl mx-auto bg-dark-card/50 backdrop-blur-lg rounded-3xl p-8 border border-neon-pink/20">
-                                <h3 class="text-2xl font-bold mb-8 text-center text-neon-pink">Nintendo Switch (Patched Game)</h3>
-                                 <ol class="list-decimal list-inside space-y-3 text-gray-300 mb-6 pl-4">
-                                    <li>Download the pre-patched XCI or NSP game file for your desired Just Dance title.</li>
-                                    <li>Install the game file onto your Switch using your preferred Custom Firmware (CFW) installer.</li>
-                                    <li>Launch the game. It should auto-connect to JDParty servers.</li>
-                                </ol>
+                        <!-- Switch CFW (Hacked) -->
+                        <div id="nx-cfw" class="platform-content hidden">
+                           <div class="max-w-4xl mx-auto bg-dark-card/50 backdrop-blur-lg rounded-3xl p-8 border border-neon-pink/20">
+                                <h3 class="text-2xl font-bold mb-8 text-center text-neon-pink">Nintendo Switch (CFW Method - JD19-22)</h3>
+                                <p class="text-center text-gray-300 mb-6">This method allows you to play JDParty on Just Dance 2019, 2020, 2021, and 2022 by using a certificate bypass or patched game files.</p>
+                                <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 mb-6">
+                                    <p class="text-yellow-300 text-center">⚠️ <strong class="font-bold text-white">This method is currently unavailable.</strong> Our team is working on providing the necessary files. Please check back later for updates.</p>
+                                </div>
                                 <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-6">
-                                    <p class="text-red-300 text-center">⚠️ Requires a Nintendo Switch with Custom Firmware (CFW) installed. Understand the risks associated with CFW before proceeding.</p>
+                                    <p class="text-red-300 text-center">⚠️ Requires a Nintendo Switch with Custom Firmware (CFW) installed. Proceed at your own risk.</p>
                                 </div>
                                 <div class="text-center">
-                                    <button class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="downloadPlatformAsset('nx-patched-game')">Download Patched Game Files</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Switch Cert (DNS Hacked Switch) -->
-                        <div id="nx-cert" class="platform-content hidden">
-                            <div class="max-w-4xl mx-auto bg-dark-card/50 backdrop-blur-lg rounded-3xl p-8 border border-neon-pink/20">
-                                <h3 class="text-2xl font-bold mb-8 text-center text-neon-pink">Nintendo Switch (DNS via Certificate Bypass - Hacked Switch)</h3>
-                                <ol class="list-decimal list-inside space-y-3 text-gray-300 mb-6 pl-4">
-                                    <li>Download the required certificate bypass files.</li>
-                                    <li>Place these files onto your Switch's SD card in the specified directory structure (usually related to your CFW's Atmosphere or ReiNX setup).</li>
-                                    <li>Ensure your Switch's DNS settings are set to automatic or your standard internet DNS.</li>
-                                    <li>Launch Just Dance 2019-2022. The bypass should redirect traffic to JDParty servers.</li>
-                                </ol>
-                                <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-6">
-                                    <p class="text-red-300 text-center">⚠️ Requires a Nintendo Switch with Custom Firmware (CFW). This method is for Just Dance 2019-2022. Use with caution.</p>
-                                </div>
-                                <div class="text-center">
-                                    <button class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50" onclick="downloadPlatformAsset('nx-cert-files')">Download Certificate Files</button>
+                                    <button class="btn-primary transition-all duration-300 ease-in-out hover:brightness-125 hover:-translate-y-1 hover:shadow-lg hover:shadow-neon-pink/50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>Downloads Coming Soon</button>
                                 </div>
                             </div>
                         </div>
